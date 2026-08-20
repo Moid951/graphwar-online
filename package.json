@@ -1,0 +1,24 @@
+{
+  "name": "graphwar-web",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Graphwar desktop-to-web behavioral migration (TypeScript)",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build -w @graphwar/math && npm run build -w @graphwar/server && npm run build -w @graphwar/client",
+    "typecheck": "tsc -b",
+    "test": "npm run test -w @graphwar/math && npm run test -w @graphwar/server",
+    "test:client": "npm run test -w @graphwar/client",
+    "test:e2e": "node packages/client/test/browser.mjs",
+    "lint": "echo \"no linter configured\"",
+    "dev:server": "npm run dev -w @graphwar/server",
+    "dev:client": "npm run dev -w @graphwar/client",
+    "start": "npm run start -w @graphwar/server"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5"
+  }
+}

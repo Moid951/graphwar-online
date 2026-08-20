@@ -1,0 +1,1083 @@
+/* Flex-layout screens: menu (screen0), room / pre-game (screen1), global room (screen2). */
+
+.menu.active,
+.room.active,
+.global.active,
+.game.active {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu .brand,
+.room .brand,
+.global .brand {
+  margin: 0;
+  font-size: 26px;
+  letter-spacing: 1px;
+  color: var(--text);
+}
+
+/* ---- shared structural rows ---- */
+
+.menu-head,
+.room-head,
+.global-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 26px 0;
+  gap: 12px;
+}
+
+.menu-head .btn,
+.room-head .btn,
+.global-head .btn {
+  flex: none;
+}
+
+.screen .btn,
+.screen .field,
+.screen .log,
+.screen .list {
+  box-sizing: border-box;
+}
+
+/* ---- buttons/fields inside flex screens are flow (not absolute) ---- */
+
+.menu .btn,
+.room .btn,
+.global .btn {
+  position: static;
+}
+
+.menu .field,
+.room .field,
+.global .field {
+  position: static;
+}
+
+.room .log,
+.room .list,
+.global .log,
+.global .list {
+  position: static;
+}
+
+/* ---- primary / ghost variants ---- */
+
+.menu .btn.primary,
+.room .btn.primary,
+.global .btn.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-text);
+  font-weight: 600;
+}
+.menu .btn.primary:hover,
+.room .btn.primary:hover,
+.global .btn.primary:hover {
+  background: var(--panel-2);
+  border-color: var(--text-dim);
+  color: var(--text);
+}
+.menu .btn.ghost,
+.room .btn.ghost,
+.global .btn.ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--text-dim);
+}
+.menu .btn.ghost:hover,
+.room .btn.ghost:hover,
+.global .btn.ghost:hover {
+  color: var(--text);
+  border-color: var(--border);
+}
+.btn.ghost.danger {
+  color: #e5484d;
+}
+.btn.ghost.danger:hover {
+  color: #ff6b6b;
+  border-color: #e5484d;
+}
+.btn.mini {
+  padding: 2px 8px;
+  font-size: 11px;
+}
+.btn[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ===========================
+   MAIN MENU
+   =========================== */
+
+.menu-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 24px;
+}
+
+.menu-body .field-group {
+  width: 240px;
+}
+
+.menu-body .field {
+  width: 100%;
+}
+
+.menu-body .btn {
+  width: 240px;
+  padding: 10px 12px;
+  font-size: 15px;
+}
+
+.menu-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px;
+  box-sizing: border-box;
+  z-index: 10;
+}
+
+.menu-panel .panel-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.menu-panel .field-group {
+  width: 100%;
+}
+
+.field-label {
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.menu-panel .field {
+  width: 100%;
+}
+
+.menu-panel .btn {
+  width: 100%;
+  padding: 8px 12px;
+}
+
+.msg-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px;
+  box-sizing: border-box;
+  z-index: 10;
+  align-items: flex-start;
+}
+
+.msg-panel .msg-text {
+  font-size: 12px;
+  line-height: 1.5;
+  min-height: 42px;
+  color: var(--text);
+}
+
+.msg-panel .btn {
+  align-self: flex-end;
+}
+
+.spacer {
+  flex: 1;
+}
+
+/* ===========================
+   PRE-GAME / ROOM
+   =========================== */
+
+/* ---- room screen containment ---- */
+
+.room {
+  overflow: hidden;
+}
+
+.room.active {
+  display: flex;
+  flex-direction: column;
+  width: 95vw;
+  height: 90vh;
+  margin: auto;
+  max-width: 1280px;
+}
+
+/* ---- fixed header ---- */
+
+.room-head {
+  padding: 0 20px;
+  height: 52px;
+  min-height: 52px;
+  border-bottom: 1px solid var(--border);
+  background: var(--panel);
+}
+
+.room-head .btn {
+  flex: none;
+}
+
+.room-title {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.room-title .brand {
+  font-size: 20px;
+}
+
+.room-sub {
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.room-conn {
+  font-size: 12px;
+  color: #4caf6e;
+  flex: none;
+}
+
+/* ---- main body: table + chat ---- */
+
+.room-main {
+  flex: 1;
+  display: flex;
+  gap: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.room-main h2,
+.global-main h2,
+.global-players h2 {
+  margin: 0 0 8px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+}
+
+/* ---- left: player data table ---- */
+
+.room-players {
+  flex: 65;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.player-table-head {
+  display: flex;
+  align-items: center;
+  padding: 6px 20px;
+  height: 40px;
+  min-height: 40px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--border);
+  gap: 10px;
+}
+
+.player-table-head .col-player {
+  flex: 3;
+  min-width: 0;
+}
+
+.player-table-head .col-team {
+  flex: 0 0 90px;
+  text-align: center;
+}
+
+.player-table-head .col-soldiers {
+  flex: 0 0 90px;
+  text-align: center;
+}
+
+.player-table-head .col-status {
+  flex: 0 0 100px;
+  text-align: center;
+}
+
+.player-table-head .col-actions {
+  flex: 0 0 80px;
+  text-align: right;
+}
+
+.player-table {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* ---- player table row ---- */
+
+.player-table-row {
+  display: flex;
+  align-items: center;
+  padding: 8px 20px;
+  gap: 10px;
+  transition: background 120ms;
+}
+
+.player-table-row + .player-table-row {
+  border-top: 1px solid var(--border);
+}
+
+.player-table-row:hover {
+  background: var(--hover-row);
+}
+
+/* col: player info */
+
+.ptr-player {
+  flex: 3;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ptr-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.ptr-name {
+  font-size: 13px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ptr-badges {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+/* col: team */
+
+.ptr-team {
+  flex: 0 0 90px;
+  text-align: center;
+}
+
+.team-toggle {
+  display: inline-flex;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.team-toggle-btn {
+  padding: 2px 10px;
+  font-size: 10px;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  color: var(--text-dim);
+  cursor: pointer;
+}
+
+.team-toggle-btn.active-t1 {
+  background: rgba(59, 130, 246, 0.15);
+  color: #3b82f6;
+}
+
+.team-toggle-btn.active-t2 {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+}
+
+.team-toggle-btn + .team-toggle-btn {
+  border-left: 1px solid var(--border);
+}
+
+/* col: soldiers stepper */
+
+.ptr-soldiers {
+  flex: 0 0 90px;
+  text-align: center;
+}
+
+.stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+}
+
+.stepper-btn {
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stepper-btn:hover {
+  background: var(--hover-row);
+}
+
+.stepper-val {
+  width: 28px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  padding: 2px 0;
+}
+
+/* col: status */
+
+.ptr-status {
+  flex: 0 0 100px;
+  text-align: center;
+}
+
+.status-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 2px 10px;
+}
+
+.status-badge.ready {
+  color: #16a34a;
+  border: 1px solid rgba(22, 163, 74, 0.4);
+  background: rgba(22, 163, 74, 0.08);
+}
+
+.status-badge.not-ready {
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  background: transparent;
+}
+
+/* col: actions */
+
+.ptr-actions {
+  flex: 0 0 80px;
+  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+/* ---- empty placeholder row ---- */
+
+.player-table-empty {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  gap: 10px;
+  color: var(--text-dim);
+  font-size: 12px;
+}
+
+.player-table-empty .ptr-avatar {
+  background: var(--panel-2);
+  color: var(--text-dim);
+}
+
+.add-ai-row {
+  cursor: pointer;
+  border-top: 1px dashed var(--border);
+  color: var(--accent);
+  transition: background 120ms;
+}
+
+.add-ai-row:hover {
+  background: var(--hover-row);
+}
+
+.add-ai-row .ptr-avatar {
+  background: rgba(29, 93, 227, 0.1);
+  color: var(--accent);
+  border: 1px dashed var(--accent);
+}
+
+.add-ai-row span {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* ---- right: chat ---- */
+
+.room-chat {
+  flex: 35;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border-left: 1px solid var(--border);
+}
+
+.room-chat-head {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  height: 40px;
+  min-height: 40px;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+}
+
+.room-chat .log {
+  flex: 1;
+  min-height: 0;
+}
+
+.room-chat .chat-input-row {
+  display: flex;
+  gap: 6px;
+  padding: 8px 12px;
+  border-top: 1px solid var(--border);
+  align-items: center;
+}
+
+.room-chat .chat-input-row .field {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ---- fixed footer ---- */
+
+.room-foot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  height: 52px;
+  min-height: 52px;
+  border-top: 1px solid var(--border);
+  background: var(--panel);
+}
+
+.room-mode {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#actionBtn {
+  min-width: 112px;
+}
+
+/* ===========================
+   GLOBAL ROOM (LOBBY) — full viewport
+   =========================== */
+
+.global.active {
+  width: 95vw;
+  height: 90vh;
+  margin: auto;
+  max-width: 1280px;
+  border: none;
+}
+
+/* ---- nav bar ---- */
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 52px;
+  min-height: 52px;
+  border-bottom: 1px solid var(--border);
+  background: var(--panel);
+  z-index: 5;
+}
+
+.nav-bar .brand {
+  font-size: 20px;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-user {
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+/* ---- main 2-col ---- */
+
+.global-main {
+  flex: 1;
+  display: flex;
+  gap: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ---- left column: rooms ---- */
+
+.global-rooms {
+  flex: 65;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border-right: 1px solid var(--border);
+}
+
+.global-rooms-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  height: 42px;
+  min-height: 42px;
+  border-bottom: 1px solid var(--border);
+}
+
+.global-rooms-toolbar .search-field {
+  flex: 1;
+  min-width: 140px;
+  padding: 5px 10px;
+  font-size: 13px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+}
+
+.global-rooms-toolbar .search-field::placeholder {
+  color: var(--text-dim);
+}
+
+.global-rooms-toolbar .search-field:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.toolbar-select {
+  padding: 5px 8px;
+  font-size: 12px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.toolbar-select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* ---- rooms header + list ---- */
+
+.rooms-head {
+  display: flex;
+  gap: 10px;
+  padding: 8px 20px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--border);
+}
+
+.rooms-head .room-name {
+  flex: 3;
+  min-width: 0;
+}
+
+.rooms-head .col-mode {
+  flex: 0 0 80px;
+  text-align: center;
+}
+
+.rooms-head .col-players {
+  flex: 0 0 60px;
+  text-align: center;
+}
+
+.rooms-head .col-status {
+  flex: 0 0 70px;
+  text-align: center;
+}
+
+.rooms-head .col-action {
+  flex: 0 0 70px;
+  text-align: right;
+}
+
+.global-rooms .rooms-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.global-rooms .rooms-list .row.cols {
+  padding: 8px 20px;
+  gap: 10px;
+  cursor: pointer;
+  transition: background 120ms;
+}
+
+.global-rooms .rooms-list .row.cols:hover {
+  background: var(--hover-row);
+}
+
+.row.cols {
+  display: flex;
+  align-items: center;
+}
+
+.row.cols .room-name {
+  flex: 3;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.row.cols .col-mode {
+  flex: 0 0 80px;
+  text-align: center;
+}
+
+.row.cols .col-players {
+  flex: 0 0 60px;
+  text-align: center;
+}
+
+.row.cols .col-status {
+  flex: 0 0 70px;
+  text-align: center;
+}
+
+.row.cols .col-action {
+  flex: 0 0 70px;
+  text-align: right;
+}
+
+.join-btn {
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--accent-text);
+  cursor: pointer;
+}
+
+.join-btn:hover {
+  background: var(--panel-2);
+  border-color: var(--text-dim);
+  color: var(--text);
+}
+
+.row.cols .status.private {
+  color: #e8a33d;
+}
+
+.row.cols .status.public {
+  color: var(--text-dim);
+}
+
+.rooms-empty {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  font-size: 13px;
+  padding: 40px;
+  text-align: center;
+}
+
+/* ---- right column: social (tabs) ---- */
+
+.global-social {
+  flex: 35;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.social-tabs {
+  display: flex;
+  height: 42px;
+  min-height: 42px;
+  border-bottom: 1px solid var(--border);
+}
+
+.social-tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-dim);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 150ms, border-color 150ms;
+}
+
+.social-tab:hover {
+  color: var(--text);
+}
+
+.social-tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.social-panel {
+  flex: 1;
+  display: none;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.social-panel.active {
+  display: flex;
+}
+
+.social-panel .chat-log {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 14px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.social-panel .chat-log .name {
+  font-weight: 600;
+}
+
+.social-panel .chat-input-row {
+  display: flex;
+  gap: 6px;
+  padding: 8px 14px;
+  border-top: 1px solid var(--border);
+}
+
+.social-panel .chat-input-row .field {
+  flex: 1;
+}
+
+.social-panel .online-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 4px 0;
+}
+
+.social-panel .online-list .row {
+  padding: 5px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.player-online {
+  gap: 8px;
+}
+
+.player-online .dot {
+  color: #4caf6e;
+}
+
+/* ===========================
+   GAME SCREEN
+   =========================== */
+
+.game-canvas-wrap {
+  position: relative;
+  flex: 7;
+  min-height: 0;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+
+.game-controls {
+  flex: 3;
+  display: flex;
+  min-height: 0;
+}
+
+/* left: angle */
+
+.gc-left {
+  flex: 0 0 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px;
+  border-right: 1px solid var(--border);
+}
+
+.gc-left .timer {
+  position: static;
+}
+
+.gc-left .angle-display {
+  position: static;
+}
+
+/* center: function + actions */
+
+.gc-center {
+  flex: 5;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 16px;
+  gap: 8px;
+}
+
+.gc-center-top {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+  align-items: center;
+}
+
+.gc-center-top .field {
+  position: static;
+  flex: 1;
+  min-height: 0;
+}
+
+.gc-center-top .btn {
+  position: static;
+  flex: none;
+  padding: 6px 20px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.gc-center-bot {
+  display: flex;
+  gap: 8px;
+}
+
+.gc-center-bot .btn {
+  position: static;
+  padding: 4px 14px;
+  font-size: 11px;
+}
+
+/* right: chat */
+
+.gc-right {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border-left: 1px solid var(--border);
+}
+
+.gc-right .log {
+  position: static;
+  flex: 1;
+  min-height: 0;
+}
+
+.gc-right .chat-input-row {
+  display: flex;
+  gap: 6px;
+  padding: 6px 8px;
+  border-top: 1px solid var(--border);
+}
+
+.gc-right .chat-input-row .field {
+  position: static;
+  flex: 1;
+}
+
+/* ===========================
+   SHARED (badges, dots, etc.)
+   =========================== */
+
+.dot {
+  font-size: 10px;
+  line-height: 1;
+}
+
+.badge {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 1px 6px;
+  flex: none;
+}
+
+.badge.host {
+  background: rgba(232, 163, 61, 0.2);
+  color: #e8a33d;
+  border: 1px solid rgba(232, 163, 61, 0.5);
+}
+
+.badge.you {
+  background: rgba(90, 160, 255, 0.2);
+  color: #5aa0ff;
+  border: 1px solid rgba(90, 160, 255, 0.5);
+}
+
+.badge.team {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+}
+
+.badge.ai {
+  background: rgba(168, 85, 247, 0.15);
+  color: #a855f7;
+  border: 1px solid rgba(168, 85, 247, 0.4);
+}
+
+/* ---- checkbox row inside panels ---- */
+
+.row-line {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
